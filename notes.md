@@ -1,18 +1,19 @@
-import 'package:bloc_app/bloc/coutner_bloc.dart';
 import 'package:bloc_app/counterapp/myhomepage.dart';
-import 'package:bloc_app/counterapp/secondpage.dart';
 import 'package:bloc_app/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-///so when we use this bloc/ cubit, there is no need of stateful widget
-///instead we can use the stateless widget itself
-
-class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key, required this.title});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  //this gives the value.Counter cubit manages the state of an integer value.
   /////
   /// the value is given by the variable state
   ///
@@ -36,9 +37,8 @@ class MyHomePage extends StatelessWidget {
   ///because we are not getting notified once the state is changing
   @override
   Widget build(BuildContext context) {
-    final cbt = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: .center,
@@ -48,8 +48,8 @@ class MyHomePage extends StatelessWidget {
             //(both can be put here as both coming from the same parent class)
             //the builder function will return an int variable which we are listening. this will be getting called on state changes
             //bloc and builder are the parameters needed
-            BlocBuilder<CounterBloc, int>(
-              bloc: cbt,
+            BlocBuilder<CounterCubit, int>(
+              bloc: cubit,
               builder: (context, _counter) {
                 return Text(
                   '$_counter has been pressed',
@@ -60,16 +60,24 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(
-            context,
-          ).push(MaterialPageRoute(builder: (context) => Secondpage()));
-        },
+
+      floatingActionButton: Column(
+        children: [
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+
+          FloatingActionButton(
+            onPressed: cubit.decrement,
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
 }
-
 //what if the floating buttons are on some other page and we need to update the state 
 //if we create another instance, it would be same as the previous because if we create new instance it will start with initial value as zero and increments from there 

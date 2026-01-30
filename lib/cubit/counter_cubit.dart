@@ -1,13 +1,13 @@
-//state management
+//state management management tools manage the state of an instance
 //state of an object means what is the value inside that instance
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //Counter cubit manages the state of an integer value..this means(atleast for now understand like this)
 class CounterCubit extends Cubit<int> {
-  //initial value of
+  //initial value must be initialized
   CounterCubit() : super(0);
   void increment() {
-    ///we are trying to update the state so that all the places where this is used being automatically,gets notified
+    ///we are trying to update the state so that all the places where this is used being, get notified automatically
     ///when ever change the state, automatically where all we used this will get notified
     ///state = state + 1;
     ///this is not a the way of updating the state of the value
