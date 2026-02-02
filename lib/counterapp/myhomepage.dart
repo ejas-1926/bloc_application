@@ -1,5 +1,4 @@
 import 'package:bloc_app/bloc/coutner_bloc.dart';
-import 'package:bloc_app/counterapp/myhomepage.dart';
 import 'package:bloc_app/counterapp/secondpage.dart';
 import 'package:bloc_app/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
@@ -50,9 +49,9 @@ class MyHomePage extends StatelessWidget {
             //bloc and builder are the parameters needed
             BlocBuilder<CounterBloc, int>(
               bloc: cbt,
-              builder: (context, _counter) {
+              builder: (context, counter) {
                 return Text(
-                  '$_counter has been pressed',
+                  '$counter has been pressed',
                   style: Theme.of(context).textTheme.headlineMedium,
                 );
               },
@@ -72,4 +71,13 @@ class MyHomePage extends StatelessWidget {
 }
 
 //what if the floating buttons are on some other page and we need to update the state 
-//if we create another instance, it would be same as the previous because if we create new instance it will start with initial value as zero and increments from there 
+//if we create another instance, it would be same as the previous 
+//because if we create new instance it will 
+//start with initial value as zero and increments from there 
+
+
+
+/////////------------------------------------------
+///General cubit logic
+///any part of the application if you want to access, get the instance using the bloc provider
+///
