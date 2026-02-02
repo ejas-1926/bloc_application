@@ -1,11 +1,12 @@
-import 'package:bloc_app/bloc/counterevents.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 //we are doing the same thing as bloc
 //Bloc requires two arguments  the type of the state which we are managing similar to the cubit
 //but here we need to pass the event as well
 //bloc is event based
+
+//if we part this we dont need to import from now onwards  all are under one unit aka one library 
+part 'counterevents.dart';
 
 class CounterBloc extends Bloc<CounterEvents, int> {
   CounterBloc() : super(0) {
